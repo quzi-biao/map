@@ -23,7 +23,7 @@ const edgeTypes = {
 };
 
 const rfStyle = {
-  backgroundColor: '#B8CEFF',
+  backgroundColor: '#182235',
 };
 
 const initialNodes: LightPointNode[] = [
