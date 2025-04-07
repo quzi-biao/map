@@ -1,0 +1,13 @@
+name = "map"
+compatibility_date = "2025-4-7"
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "pnpm run build"
+output_dir = "dist"
+
+# For SPA routing
+[site.mutable_assets]
+fallback_page = "/index.html"
