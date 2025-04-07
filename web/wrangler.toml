@@ -8,7 +8,6 @@ entry-point = "workers-site"
 
 [build]
 command = "pnpm run build"
-upload.format = "service-worker"
 
 [build.upload]
 format = "service-worker"

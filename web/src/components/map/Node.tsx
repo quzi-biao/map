@@ -173,7 +173,7 @@ function ConceptNodeComponent({ data, id }: NodeProps) {
             onClick={(e) => e.stopPropagation()}
           />
           
-          <div className="mt-2">
+          {/* <div className="mt-2">
             <label className="text-xs mb-1 block text-white/70">理解程度</label>
             <div className="flex items-center gap-2">
               <div className="flex-1">
@@ -188,7 +188,7 @@ function ConceptNodeComponent({ data, id }: NodeProps) {
               </div>
               <span className="text-xs w-8 text-white/70">{brightness}%</span>
             </div>
-          </div>
+          </div> */}
         </CardContent>
       )}
       
