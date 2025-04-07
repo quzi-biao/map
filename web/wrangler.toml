@@ -1,0 +1,3 @@
+name = "map"
+compatibility_date = "2025-04-07"
+main = "./src/index.ts"
