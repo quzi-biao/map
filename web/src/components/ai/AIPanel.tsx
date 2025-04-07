@@ -107,6 +107,7 @@ export function AIPanel({ selectedNodeId }: AIProps) {
             </SelectTrigger>
             <SelectContent className="!bg-gray-900 border-gray-700">
               <SelectItem value="deepseek/deepseek-r1" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">Deepseek R1</SelectItem>
+              <SelectItem value="deepseek/deepseek-r1:online" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">Deepseek r1 online</SelectItem>
               <SelectItem value="anthropic/claude-3.7-sonnet:thinking" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">Claude 3.7 thinking</SelectItem>
               <SelectItem value="perplexity/sonar-deep-research" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">perplexity/sonar-deep-research</SelectItem>
             </SelectContent>
