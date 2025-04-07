@@ -1,132 +1,110 @@
-import { useCallback, useState, useEffect } from 'react';
-import {
-  ReactFlow,
-  addEdge,
-  applyNodeChanges,
-  applyEdgeChanges,
-  Controls,
-  OnNodesChange,
-  OnEdgesChange,
-  OnConnect,
-} from '@xyflow/react';
+import { useEffect, useState } from 'react';
 import '@xyflow/react/dist/style.css';
-import LightPointNode from './components/LightPointNode';
-import LightRayEdge, { LightRayEdge as LightRayEdgeType } from './components/LightRayEdge';
-
-
-const nodeTypes = {
-  lightPoint: LightPointNode,
-};
-
-const edgeTypes = {
-  lightRay: LightRayEdge,
-};
-
-const rfStyle = {
-  backgroundColor: '#182235',
-};
-
-const initialNodes: LightPointNode[] = [
-  { 
-    id: '1', 
-    type: 'lightPoint',
-    position: { x: 250, y: 100 }, 
-    data: { 
-      label: '概念一',
-      content: '这是概念一的详细内容...',
-    } 
-  },
-  { 
-    id: '2', 
-    type: 'lightPoint',
-    position: { x: 250, y: 300 }, 
-    data: { 
-      label: '概念二',
-      content: '这是概念二的详细内容...',
-    } 
-  },
-];
-
-const initialEdges: LightRayEdgeType[] = [
-  { 
-    id: 'e1-2', 
-    source: '1', 
-    target: '2', 
-    type: 'lightRay',
-    data: { 
-      intensity: 70 // Adjust intensity as needed (0-100)
-    } 
-  }
-];
-
+import { ConceptMapView } from './components/map/ConceptMapView';
+import { AIPanel } from './components/ai/AIPanel';
+import { useMapStore } from './store/mapStore';
+import { Toaster } from 'sonner';
+import { Sidebar, SidebarBody, SidebarLink } from './components/ui/sidebar';
+import { ChevronRight } from 'lucide-react';
 
 export default function App() {
-  const [nodes, setNodes] = useState<LightPointNode[]>(initialNodes);
-  const [edges, setEdges] = useState<LightRayEdgeType[]>(initialEdges);
+  const { selectedNodeId } = useMapStore();
+  const [aiPanelWidth, setAiPanelWidth] = useState(256); // 默认宽度
+  const [isResizing, setIsResizing] = useState(false);
 
-  // Function to update node content
-  const updateNodeContent = useCallback((nodeId: string, content: string) => {
-    setNodes((nds) =>
-      nds.map((node) => {
-        if (node.id === nodeId) {
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              content,
-            },
-          };
-        }
-        return node;
-      })
-    );
+  // Initialize app
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
   }, []);
 
-  // Add the update function to each node's data
-  useEffect(() => {
-    setNodes((nds) =>
-      nds.map((node) => ({
-        ...node,
-        data: {
-          ...node.data,
-          updateContent: updateNodeContent,
-        },
-      }))
-    );
-  }, [updateNodeContent]);
+  // 处理拖动事件
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+    document.body.style.cursor = 'col-resize';
 
-  const onNodesChange: OnNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds) as LightPointNode[]),
-    [setNodes],
-  );
-  const onEdgesChange: OnEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds) as LightRayEdgeType[]),
-    [setEdges],
-  );
-  const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge({
-      ...connection,
-      type: 'lightRay',
-      data: { intensity: 70 }
-    }, eds) as LightRayEdgeType[]),
-    [setEdges],
-  );
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      
+      // 计算新的宽度（窗口宽度减去鼠标位置）
+      const newWidth = window.innerWidth - e.clientX;
+      // 限制最小和最大宽度
+      const clampedWidth = Math.min(Math.max(newWidth, 200), 600);
+      setAiPanelWidth(clampedWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+      document.body.style.cursor = '';
+    };
+
+    if (isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizing]);
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={nodeTypes}
-        edgeTypes={edgeTypes}
-        fitView
-        style={rfStyle}
+    <div 
+      className="flex h-screen w-screen overflow-hidden"
+      style={{
+        background: `
+          linear-gradient(to bottom right, 
+            rgba(17, 24, 39, 0.95), 
+            rgba(10, 15, 24, 0.98)
+          )
+        `,
+        backdropFilter: 'blur(40px)',
+      }}
+    >
+      {/* Sidebar */}
+      <Sidebar>
+        <SidebarBody>
+          <SidebarLink
+            link={{
+              label: "工具栏",
+              href: "#",
+              icon: <ChevronRight className="w-5 h-5 text-neutral-400" />
+            }}
+          />
+        </SidebarBody>
+      </Sidebar>
+      
+      <ConceptMapView />
+      
+      {/* Resizable border - 优化分割线 */}
+      <div
+        className={`w-1 transition-colors ${
+          isResizing 
+            ? 'bg-blue-500/30' 
+            : 'bg-gray-800 hover:bg-blue-500/20'
+        }`}
+        onMouseDown={handleMouseDown}
+      />
+      
+      {/* AI assistance panel - 优化面板背景 */}
+      <div 
+        style={{ 
+          width: `${aiPanelWidth}px`,
+          background: 'linear-gradient(to bottom, rgba(17, 24, 39, 0.95), rgba(10, 15, 24, 0.98))',
+          borderLeft: '1px solid rgba(75, 85, 99, 0.2)',
+        }}
+        className={`h-full transition-all duration-75 ${
+          isResizing ? 'select-none' : ''
+        }`}
       >
-        <Controls />
-      </ReactFlow>
+        <AIPanel selectedNodeId={selectedNodeId} />
+      </div>
+      
+      <Toaster position="top-right" richColors />
     </div>
   );
 }

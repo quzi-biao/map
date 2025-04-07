@@ -1,4 +1,5 @@
 import { EdgeProps, getBezierPath, Edge } from '@xyflow/react';
+import { useMapStore } from '@/store/mapStore';
 
 // Define edge data interface
 interface LightRayEdgeData extends Record<string, unknown> {
@@ -7,6 +8,8 @@ interface LightRayEdgeData extends Record<string, unknown> {
 
 // Define edge type
 export type LightRayEdge = Edge<LightRayEdgeData, 'lightRay'>;
+
+
 
 export default function LightRayEdge({
   id,
@@ -18,7 +21,11 @@ export default function LightRayEdge({
   targetPosition,
   style = {},
   data,
+  selected,
 }: EdgeProps<LightRayEdge>) {
+  const { selectedEdgeId } = useMapStore();
+  const isSelected = selected || selectedEdgeId === id;
+
   // Get the edge path
   const [edgePath] = getBezierPath({
     sourceX,
@@ -33,7 +40,7 @@ export default function LightRayEdge({
   const intensity = data?.intensity || 60;
   
   return (
-    <>
+    <g className={`edge ${isSelected ? 'selected' : ''}`}>
       {/* Base edge with glow effect */}
       <path
         id={id}
@@ -52,9 +59,9 @@ export default function LightRayEdge({
         id={`${id}-glow`}
         style={{
           ...style,
-          strokeWidth: 8,
-          stroke: '#FFDE59',
-          opacity: intensity / 100,
+          strokeWidth: isSelected ? 12 : 8,
+          stroke: isSelected ? '#FFE980' : '#FFDE59',
+          opacity: isSelected ? (intensity + 20) / 100 : intensity / 100,
           filter: 'blur(4px)',
         }}
         className="react-flow__edge-path"
@@ -66,13 +73,13 @@ export default function LightRayEdge({
         id={`${id}-center`}
         style={{
           ...style,
-          strokeWidth: 1,
+          strokeWidth: isSelected ? 2 : 1,
           stroke: '#FFFFFF',
-          opacity: 0.9,
+          opacity: isSelected ? 1 : 0.9,
         }}
         className="react-flow__edge-path"
         d={edgePath}
       />
-    </>
+    </g>
   );
 } 
