@@ -4,6 +4,13 @@ import { useMapStore } from '@/store/mapStore';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, Loader2 } from 'lucide-react';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface AIProps {
   selectedNodeId: string | null;
@@ -14,6 +21,7 @@ export function AIPanel({ selectedNodeId }: AIProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [streamingResponse] = useState('');
+  const [selectedModel, setSelectedModel] = useState('deepseek/deepseek-r1');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { nodes } = useMapStore();
   
@@ -74,7 +82,7 @@ export function AIPanel({ selectedNodeId }: AIProps) {
             return newMessages;
           });
         },
-        'deepseek/deepseek-r1',
+        selectedModel,
         0.7
       );
       
@@ -91,6 +99,20 @@ export function AIPanel({ selectedNodeId }: AIProps) {
       {/* Header */}
       <div className="p-4 border-b border-gray-800">
         <h3 className="text-lg font-medium">AI 助手</h3>
+        {selectedNodeId && (
+          <div className="mt-2">
+          <Select value={selectedModel} onValueChange={setSelectedModel}>
+            <SelectTrigger className="w-full !bg-gray-900 !text-white border-gray-700">
+              <SelectValue placeholder="选择AI模型" />
+            </SelectTrigger>
+            <SelectContent className="!bg-gray-900 border-gray-700">
+              <SelectItem value="deepseek/deepseek-r1" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">Deepseek R1</SelectItem>
+              <SelectItem value="anthropic/claude-3.7-sonnet:thinking" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">Claude 3.7 thinking</SelectItem>
+              <SelectItem value="perplexity/sonar-deep-research" className="!text-gray-200 focus:!bg-gray-800 focus:!text-white">perplexity/sonar-deep-research</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        )}
       </div>
 
       {/* Body */}
