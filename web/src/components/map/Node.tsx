@@ -3,7 +3,6 @@ import { Handle, Position, NodeProps } from '@xyflow/react';
 import { ChevronDown, GripHorizontal, Trash2 } from 'lucide-react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { useMapStore } from '@/store/mapStore';
 
