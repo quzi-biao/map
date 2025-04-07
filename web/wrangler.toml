@@ -1,13 +1,14 @@
 name = "map"
 compatibility_date = "2025-4-7"
 
+
 [site]
 bucket = "./dist"
+entry-point = "workers-site"
 
 [build]
 command = "pnpm run build"
-output_dir = "dist"
+upload.format = "service-worker"
 
-# For SPA routing
-[site.mutable_assets]
-fallback_page = "/index.html"
+[build.upload]
+format = "service-worker"
