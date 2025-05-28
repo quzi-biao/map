@@ -181,6 +181,8 @@ export const initializeDB = async (): Promise<void> => {
         name: "默认知识地图",
         nodes: [],
         edges: [],
+        chatHistory: [],
+        tokenCount: 0,
       }
       await dbService.saveMap(defaultMap)
       await dbService.saveActiveMapId(defaultMap.id)

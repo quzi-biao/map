@@ -5,6 +5,7 @@ import ReactFlow, {
   MiniMap,
   Controls,
   Background,
+  BackgroundVariant,
   ConnectionLineType,
   ConnectionMode,
   type NodeMouseHandler,
@@ -130,30 +131,7 @@ export default function KnowledgeMap() {
           edgesUpdatable={true}
           elementsSelectable={true}
         >
-          <Controls className="bg-gray-800 border-gray-700 text-gray-300" />
-          <MiniMap
-            nodeColor={(node) => {
-              const level = node.data.understandingLevel || UnderstandingLevel.NotStarted
-              // 使用自然元素色调
-              switch (level) {
-                case UnderstandingLevel.NotStarted:
-                  return "#57534e" // 深石色
-                case UnderstandingLevel.Basic:
-                  return "#78716c" // 中石色
-                case UnderstandingLevel.Intermediate:
-                  return "#92400e" // 深木色
-                case UnderstandingLevel.Advanced:
-                  return "#b45309" // 中木色
-                case UnderstandingLevel.Mastered:
-                  return "#047857" // 绿叶色
-                default:
-                  return "#57534e"
-              }
-            }}
-            maskColor="#1f2937"
-            className="bg-gray-800 border-gray-700"
-          />
-          <Background variant="dots" gap={12} size={1} color="#4b5563" />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} color="#4b5563" />
           {/* 将添加节点按钮移到左上角 */}
           <Panel position="top-left" className="ml-2 mt-2">
             <Button onClick={addNewNode} size="sm" className="gap-1 bg-amber-700 hover:bg-amber-800">

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import type { Node } from "reactflow"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import RichTextEditor from "./rich-text-editor"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -93,6 +93,7 @@ export default function NodeEditDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="p-0 gap-0 bg-transparent border-0 max-w-none">
+        <DialogTitle className="sr-only">编辑节点</DialogTitle>
         {/* 在return语句中，修改布局以使编辑界面更大并居中 */}
         {/* 替换flex容器的样式和内部组件的布局 */}
         <div className="fixed inset-0 z-50 flex items-center justify-center">
