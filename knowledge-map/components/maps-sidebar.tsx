@@ -54,17 +54,17 @@ export default function MapsSidebar() {
     <>
       <div
         className={cn(
-          "h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 flex flex-col",
+          "h-full bg-gray-50 border-r border-gray-200 transition-all duration-300 flex flex-col",
           isCollapsed ? "w-12" : "w-64",
         )}
       >
         {/* 侧边栏头部 */}
-        <div className="flex items-center justify-between p-3 border-b border-gray-700">
-          {!isCollapsed && <h3 className="font-medium text-white">知识地图</h3>}
+        <div className="flex items-center justify-between p-3 border-b border-gray-200">
+          {!isCollapsed && <h3 className="font-medium text-gray-900">知识地图</h3>}
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 text-gray-400 hover:text-white ml-auto"
+            className="h-8 w-8 text-gray-600 hover:text-gray-900 ml-auto"
             onClick={() => setIsCollapsed(!isCollapsed)}
           >
             {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
@@ -79,8 +79,8 @@ export default function MapsSidebar() {
               className={cn(
                 "flex items-center px-3 py-2 cursor-pointer group",
                 map.id === activeMapId
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-300 hover:bg-gray-700/50 hover:text-white",
+                  ? "bg-blue-100 text-blue-900"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
               )}
               onClick={() => switchMap(map.id)}
             >
@@ -99,9 +99,9 @@ export default function MapsSidebar() {
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="bg-gray-800 text-gray-200 border-gray-700">
+                    <DropdownMenuContent align="end" className="bg-white text-gray-900 border-gray-200">
                       <DropdownMenuItem
-                        className="flex items-center cursor-pointer hover:bg-gray-700"
+                        className="flex items-center cursor-pointer hover:bg-gray-100"
                         onClick={(e) => {
                           e.stopPropagation()
                           openRenameDialog(map.id, map.name)
@@ -111,7 +111,7 @@ export default function MapsSidebar() {
                         重命名
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="flex items-center cursor-pointer text-red-400 hover:bg-gray-700 hover:text-red-400"
+                        className="flex items-center cursor-pointer text-red-600 hover:bg-gray-100 hover:text-red-600"
                         onClick={(e) => {
                           e.stopPropagation()
                           handleDeleteMap(map.id)
@@ -129,12 +129,12 @@ export default function MapsSidebar() {
         </div>
 
         {/* 添加新地图按钮 */}
-        <div className="p-3 border-t border-gray-700">
+        <div className="p-3 border-t border-gray-200">
           <Button
             variant="outline"
             size={isCollapsed ? "icon" : "default"}
             className={cn(
-              "w-full bg-gray-700 border-gray-600 text-gray-200 hover:bg-gray-600 hover:text-white",
+              "w-full bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900",
               isCollapsed && "h-8 w-8",
             )}
             onClick={() => setIsCreateDialogOpen(true)}
@@ -147,7 +147,7 @@ export default function MapsSidebar() {
 
       {/* 创建新地图对话框 */}
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-        <DialogContent className="bg-gray-800 text-white border-gray-700">
+        <DialogContent className="bg-white text-gray-900 border-gray-200">
           <DialogHeader>
             <DialogTitle>创建新知识地图</DialogTitle>
           </DialogHeader>
@@ -156,7 +156,7 @@ export default function MapsSidebar() {
               value={newMapName}
               onChange={(e) => setNewMapName(e.target.value)}
               placeholder="输入知识地图名称"
-              className="bg-gray-700 border-gray-600 text-white"
+              className="bg-white border-gray-300 text-gray-900"
               autoFocus
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleCreateMap()
@@ -167,14 +167,14 @@ export default function MapsSidebar() {
             <Button
               variant="ghost"
               onClick={() => setIsCreateDialogOpen(false)}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-600 hover:text-gray-900"
             >
               取消
             </Button>
             <Button
               onClick={handleCreateMap}
               disabled={!newMapName.trim()}
-              className="bg-emerald-700 hover:bg-emerald-600 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               创建
             </Button>
@@ -184,7 +184,7 @@ export default function MapsSidebar() {
 
       {/* 重命名地图对话框 */}
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>
-        <DialogContent className="bg-gray-800 text-white border-gray-700">
+        <DialogContent className="bg-white text-gray-900 border-gray-200">
           <DialogHeader>
             <DialogTitle>重命名知识地图</DialogTitle>
           </DialogHeader>
@@ -193,7 +193,7 @@ export default function MapsSidebar() {
               value={mapToRename?.name || ""}
               onChange={(e) => setMapToRename((prev) => (prev ? { ...prev, name: e.target.value } : null))}
               placeholder="输入新名称"
-              className="bg-gray-700 border-gray-600 text-white"
+              className="bg-white border-gray-300 text-gray-900"
               autoFocus
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleRenameMap()
@@ -204,14 +204,14 @@ export default function MapsSidebar() {
             <Button
               variant="ghost"
               onClick={() => setIsRenameDialogOpen(false)}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-600 hover:text-gray-900"
             >
               取消
             </Button>
             <Button
               onClick={handleRenameMap}
               disabled={!mapToRename?.name.trim()}
-              className="bg-emerald-700 hover:bg-emerald-600 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               重命名
             </Button>

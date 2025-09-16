@@ -45,20 +45,20 @@ export default function ContextMenu({ x, y, onDelete, onClose, type }: ContextMe
   return (
     <div
       ref={menuRef}
-      className="absolute z-50 bg-gray-800 border border-gray-700 rounded-md shadow-lg py-1 min-w-[120px]"
+      className="absolute z-50 bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[120px]"
       style={{
         left: x,
         top: y,
       }}
     >
       <button
-        className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 flex items-center"
+        className="w-full text-left px-3 py-2 text-sm text-gray-900 hover:bg-gray-100 flex items-center"
         onClick={() => {
           onDelete()
           onClose()
         }}
       >
-        <Trash2 className="h-4 w-4 mr-2 text-red-400" />
+        <Trash2 className="h-4 w-4 mr-2 text-red-600" />
         删除{type === "edge" ? "连线" : "节点"}
       </button>
     </div>

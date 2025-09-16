@@ -26,9 +26,9 @@ export default function Home() {
   // 显示加载状态
   if (isLoading || !dbInitialized) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="w-full h-screen flex items-center justify-center bg-white text-gray-900">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500 mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
           <p className="text-lg">加载知识地图中...</p>
         </div>
       </div>

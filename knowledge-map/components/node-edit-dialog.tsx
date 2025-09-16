@@ -76,17 +76,17 @@ export default function NodeEditDialog({
   const getUnderstandingLevelStyle = (level: UnderstandingLevel) => {
     switch (level) {
       case UnderstandingLevel.NotStarted:
-        return "text-stone-300" // 浅石色
+        return "text-gray-600" // 灰色
       case UnderstandingLevel.Basic:
-        return "text-stone-200" // 更浅石色
+        return "text-blue-600" // 蓝色
       case UnderstandingLevel.Intermediate:
-        return "text-amber-300" // 浅木色
+        return "text-amber-600" // 琥珀色
       case UnderstandingLevel.Advanced:
-        return "text-amber-200" // 更浅木色
+        return "text-orange-600" // 橙色
       case UnderstandingLevel.Mastered:
-        return "text-emerald-300" // 浅绿叶色
+        return "text-emerald-600" // 绿色
       default:
-        return "text-stone-300"
+        return "text-gray-600"
     }
   }
 
@@ -101,26 +101,26 @@ export default function NodeEditDialog({
 
           <div className="flex items-start gap-4 z-50">
             {/* 编辑对话框 - 增加宽度 */}
-            <div className="w-[800px] bg-gray-800 text-white overflow-hidden border border-gray-700 rounded-lg shadow-xl">
-              <div className="flex items-center justify-between p-5 border-b border-gray-700/50">
+            <div className="w-[800px] bg-white text-gray-900 overflow-hidden border border-gray-200 rounded-lg shadow-xl">
+              <div className="flex items-center justify-between p-5 border-b border-gray-200">
                 <Input
                   id="node-title"
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
-                  className="text-2xl font-medium border-none shadow-none focus-visible:ring-0 px-0 h-auto bg-transparent text-white"
+                  className="text-2xl font-medium border-none shadow-none focus-visible:ring-0 px-0 h-auto bg-transparent text-gray-900"
                   placeholder="无标题"
                 />
               </div>
 
               <div className="p-0">
-                <RichTextEditor content={content} onChange={setContent} darkMode={true} minimalist={true} />
+                <RichTextEditor content={content} onChange={setContent} darkMode={false} minimalist={true} />
               </div>
 
               {/* 高级选项（默认隐藏） */}
-              <div className="border-t border-gray-700/50">
+              <div className="border-t border-gray-200">
                 <Button
                   variant="ghost"
-                  className="w-full flex items-center justify-center py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700/50"
+                  className="w-full flex items-center justify-center py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   onClick={() => setShowAdvanced(!showAdvanced)}
                 >
                   {showAdvanced ? (
@@ -135,8 +135,8 @@ export default function NodeEditDialog({
                 </Button>
 
                 {showAdvanced && (
-                  <div className="p-4 bg-gray-800/80 border-t border-gray-700/50">
-                    <div className="text-base font-medium mb-2 text-gray-300">理解程度</div>
+                  <div className="p-4 bg-gray-50 border-t border-gray-200">
+                    <div className="text-base font-medium mb-2 text-gray-700">理解程度</div>
                     <RadioGroup
                       value={understandingLevel.toString()}
                       onValueChange={(value) => setUnderstandingLevel(Number.parseInt(value) as UnderstandingLevel)}

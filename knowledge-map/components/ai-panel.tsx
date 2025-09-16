@@ -408,15 +408,15 @@ export default function AiPanel() {
   const renderGuidanceContent = () => {
     return (
       <>
-        <div className="flex items-center justify-between p-3 border-b border-gray-700">
+        <div className="flex items-center justify-between p-3 border-b border-gray-200">
           <div className="flex items-center">
-            <Sparkles className="h-5 w-5 text-amber-400 mr-2" />
-            <h3 className="font-medium text-white">知识地图引导</h3>
+            <Sparkles className="h-5 w-5 text-blue-500 mr-2" />
+            <h3 className="font-medium text-gray-900">知识地图引导</h3>
           </div>
           {guidanceState === GuidanceState.GeneratingMap && (
             <div className="flex items-center">
-              <Loader2 className="h-4 w-4 animate-spin mr-2 text-amber-400" />
-              <span className="text-sm text-amber-400">生成中...</span>
+              <Loader2 className="h-4 w-4 animate-spin mr-2 text-blue-500" />
+              <span className="text-sm text-blue-500">生成中...</span>
             </div>
           )}
         </div>
@@ -470,14 +470,14 @@ export default function AiPanel() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="回答问题..."
-              className="bg-gray-700 border-gray-600 text-white"
+              className="bg-white border-gray-300 text-gray-900"
               disabled={isLoading || guidanceState === GuidanceState.GeneratingMap}
             />
             <Button
               onClick={handleGuidanceMessage}
               disabled={!input.trim() || isLoading || guidanceState === GuidanceState.GeneratingMap}
               size="icon"
-              className="bg-amber-700 hover:bg-amber-600 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </Button>
@@ -491,17 +491,17 @@ export default function AiPanel() {
   const renderChatContent = () => {
     return (
       <>
-        <div className="flex items-center justify-between p-3 border-b border-gray-700">
+        <div className="flex items-center justify-between p-3 border-b border-gray-200">
           <div className="flex items-center">
-            <Bot className="h-5 w-5 text-emerald-400 mr-2" />
-            <h3 className="font-medium text-white">AI 助手</h3>
-            {isDragging && <span className="ml-2 text-xs text-emerald-400">宽度: {panelWidth}px</span>}
+            <Bot className="h-5 w-5 text-blue-500 mr-2" />
+            <h3 className="font-medium text-gray-900">AI 助手</h3>
+            {isDragging && <span className="ml-2 text-xs text-blue-500">宽度: {panelWidth}px</span>}
           </div>
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-gray-400 hover:text-white"
+              className="h-8 w-8 text-gray-600 hover:text-gray-900"
               onClick={handleClearChat}
               title="清空聊天历史"
             >
@@ -510,7 +510,7 @@ export default function AiPanel() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-gray-400 hover:text-white"
+              className="h-8 w-8 text-gray-600 hover:text-gray-900"
               onClick={() => setIsExpanded(false)}
             >
               <X className="h-4 w-4" />
@@ -567,14 +567,14 @@ export default function AiPanel() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="输入问题..."
-              className="bg-gray-700 border-gray-600 text-white"
+              className="bg-white border-gray-300 text-gray-900"
               disabled={isLoading}
             />
             <Button
               onClick={handleSendMessage}
               disabled={!input.trim() || isLoading}
               size="icon"
-              className="bg-emerald-700 hover:bg-emerald-600 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </Button>
@@ -600,7 +600,7 @@ export default function AiPanel() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-0 top-4 transform -translate-x-full bg-gray-800 hover:bg-gray-700 rounded-l-md rounded-r-none h-12 w-8 border-0"
+        className="absolute left-0 top-4 transform -translate-x-full bg-gray-200 hover:bg-gray-300 rounded-l-md rounded-r-none h-12 w-8 border-0 text-gray-700 hover:text-gray-900"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {isExpanded ? <Minimize2 className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
@@ -611,18 +611,18 @@ export default function AiPanel() {
         <div
           className={cn(
             "absolute left-0 top-0 h-full w-4 cursor-ew-resize z-20",
-            isDragging ? "bg-emerald-500/30" : "hover:bg-emerald-500/20",
+            isDragging ? "bg-blue-500/30" : "hover:bg-blue-500/20",
           )}
           onMouseDown={startDragging}
           style={{ transform: "translateX(-2px)" }}
         >
           <div
             className={cn(
-              "absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-gray-700 rounded-full p-1",
+              "absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-gray-300 rounded-full p-1",
               isDragging ? "opacity-100" : "opacity-0 hover:opacity-100",
             )}
           >
-            <GripVertical className="h-4 w-4 text-emerald-400" />
+            <GripVertical className="h-4 w-4 text-blue-500" />
           </div>
         </div>
       )}
@@ -630,7 +630,7 @@ export default function AiPanel() {
       {/* 面板内容 */}
       <div
         className={cn(
-          "bg-gray-800 border-l border-gray-700 h-full flex flex-col",
+          "bg-white border-l border-gray-200 h-full flex flex-col",
           isExpanded ? "opacity-100" : "opacity-0",
         )}
       >

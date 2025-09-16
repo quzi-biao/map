@@ -109,7 +109,7 @@ export default function KnowledgeMap() {
 
   return (
     <>
-      <div className="w-full h-full bg-gray-900">
+      <div className="w-full h-full bg-white">
         <ReactFlow
           nodes={processedNodes}
           edges={processedEdges}
@@ -121,7 +121,7 @@ export default function KnowledgeMap() {
           onEdgeContextMenu={onEdgeContextMenu}
           nodeTypes={nodeTypes}
           fitView
-          className="dark-theme"
+          className="light-theme"
           connectionLineType={ConnectionLineType.SmoothStep}
           connectionMode={ConnectionMode.Loose}
           defaultEdgeOptions={{
@@ -131,10 +131,10 @@ export default function KnowledgeMap() {
           edgesUpdatable={true}
           elementsSelectable={true}
         >
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1} color="#4b5563" />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} color="#d1d5db" />
           {/* 将添加节点按钮移到左上角 */}
           <Panel position="top-left" className="ml-2 mt-2">
-            <Button onClick={addNewNode} size="sm" className="gap-1 bg-amber-700 hover:bg-amber-800">
+            <Button onClick={addNewNode} size="sm" className="gap-1 bg-blue-600 hover:bg-blue-700 text-white">
               <Plus className="h-4 w-4" /> 添加节点
             </Button>
           </Panel>

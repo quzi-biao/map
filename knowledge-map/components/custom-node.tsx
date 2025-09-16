@@ -17,20 +17,20 @@ function CustomNode({ data, isConnectable }: NodeProps) {
   const getNodeStyle = () => {
     const level = data.understandingLevel || UnderstandingLevel.NotStarted
 
-    // 使用自然元素色调 - 从石头(灰褐色)到木头(暖棕色)到绿叶(鲜绿色)
+    // 使用亮色主题的自然元素色调
     switch (level) {
       case UnderstandingLevel.NotStarted:
-        return "bg-stone-700 border-stone-600 text-stone-100" // 深石色
+        return "bg-gray-100 border-gray-300 text-gray-800" // 浅灰色
       case UnderstandingLevel.Basic:
-        return "bg-stone-600 border-stone-500 text-stone-50" // 中石色
+        return "bg-blue-50 border-blue-200 text-blue-800" // 浅蓝色
       case UnderstandingLevel.Intermediate:
-        return "bg-amber-800 border-amber-700 text-amber-50" // 深木色
+        return "bg-amber-50 border-amber-200 text-amber-800" // 浅琥珀色
       case UnderstandingLevel.Advanced:
-        return "bg-amber-700 border-amber-600 text-amber-50" // 中木色
+        return "bg-orange-50 border-orange-200 text-orange-800" // 浅橙色
       case UnderstandingLevel.Mastered:
-        return "bg-emerald-700 border-emerald-600 text-emerald-50" // 绿叶色
+        return "bg-emerald-50 border-emerald-200 text-emerald-800" // 浅绿色
       default:
-        return "bg-stone-700 border-stone-600 text-stone-100"
+        return "bg-gray-100 border-gray-300 text-gray-800"
     }
   }
 
@@ -40,17 +40,17 @@ function CustomNode({ data, isConnectable }: NodeProps) {
 
     switch (level) {
       case UnderstandingLevel.NotStarted:
-        return "bg-stone-300" // 浅石色
+        return "bg-gray-400" // 灰色指示器
       case UnderstandingLevel.Basic:
-        return "bg-stone-200" // 更浅石色
+        return "bg-blue-400" // 蓝色指示器
       case UnderstandingLevel.Intermediate:
-        return "bg-amber-300" // 浅木色
+        return "bg-amber-400" // 琥珀色指示器
       case UnderstandingLevel.Advanced:
-        return "bg-amber-200" // 更浅木色
+        return "bg-orange-400" // 橙色指示器
       case UnderstandingLevel.Mastered:
-        return "bg-emerald-300" // 浅绿叶色
+        return "bg-emerald-400" // 绿色指示器
       default:
-        return "bg-stone-300"
+        return "bg-gray-400"
     }
   }
 
@@ -81,17 +81,17 @@ function CustomNode({ data, isConnectable }: NodeProps) {
     // 根据理解程度调整阴影颜色和强度
     switch (level) {
       case UnderstandingLevel.NotStarted:
-        return "rgba(68, 64, 60, 0.3)" // 石色阴影
+        return "rgba(0, 0, 0, 0.1)" // 轻微阴影
       case UnderstandingLevel.Basic:
-        return "rgba(68, 64, 60, 0.35)" // 石色阴影
+        return "rgba(59, 130, 246, 0.15)" // 蓝色阴影
       case UnderstandingLevel.Intermediate:
-        return "rgba(146, 64, 14, 0.35)" // 木色阴影
+        return "rgba(245, 158, 11, 0.15)" // 琥珀色阴影
       case UnderstandingLevel.Advanced:
-        return "rgba(146, 64, 14, 0.4)" // 木色阴影
+        return "rgba(249, 115, 22, 0.15)" // 橙色阴影
       case UnderstandingLevel.Mastered:
-        return "rgba(4, 120, 87, 0.4)" // 绿色阴影
+        return "rgba(16, 185, 129, 0.15)" // 绿色阴影
       default:
-        return "rgba(68, 64, 60, 0.3)"
+        return "rgba(0, 0, 0, 0.1)"
     }
   }
 
@@ -99,8 +99,8 @@ function CustomNode({ data, isConnectable }: NodeProps) {
   const handleStyle = {
     width: 8,
     height: 8,
-    backgroundColor: "#a8a29e",
-    border: "1px solid #78716c",
+    backgroundColor: "#d1d5db",
+    border: "1px solid #9ca3af",
   }
 
   return (
@@ -128,7 +128,7 @@ function CustomNode({ data, isConnectable }: NodeProps) {
         id="top"
         isConnectable={isConnectable}
         style={handleStyle}
-        className="!transform !-translate-y-[1px] hover:!bg-amber-300"
+        className="!transform !-translate-y-[1px] hover:!bg-blue-300"
       />
       <Handle
         type="source"
@@ -136,7 +136,7 @@ function CustomNode({ data, isConnectable }: NodeProps) {
         id="right"
         isConnectable={isConnectable}
         style={handleStyle}
-        className="!transform !translate-x-[1px] hover:!bg-amber-300"
+        className="!transform !translate-x-[1px] hover:!bg-blue-300"
       />
       <Handle
         type="source"
@@ -144,7 +144,7 @@ function CustomNode({ data, isConnectable }: NodeProps) {
         id="bottom"
         isConnectable={isConnectable}
         style={handleStyle}
-        className="!transform !translate-y-[1px] hover:!bg-amber-300"
+        className="!transform !translate-y-[1px] hover:!bg-blue-300"
       />
       <Handle
         type="source"
@@ -152,7 +152,7 @@ function CustomNode({ data, isConnectable }: NodeProps) {
         id="left"
         isConnectable={isConnectable}
         style={handleStyle}
-        className="!transform !-translate-x-[1px] hover:!bg-amber-300"
+        className="!transform !-translate-x-[1px] hover:!bg-blue-300"
       />
     </div>
   )

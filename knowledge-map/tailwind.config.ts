@@ -10,6 +10,10 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			'alibaba45': ['Alibaba45', 'Arial', 'Helvetica', 'sans-serif'],
+  			'sans': ['Alibaba45', 'Arial', 'Helvetica', 'sans-serif'],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
