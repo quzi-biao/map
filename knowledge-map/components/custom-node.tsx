@@ -20,17 +20,17 @@ function CustomNode({ data, isConnectable }: NodeProps) {
     // 使用亮色主题的自然元素色调
     switch (level) {
       case UnderstandingLevel.NotStarted:
-        return "bg-gray-100 border-gray-300 text-gray-800" // 浅灰色
+        return "bg-gray-100 border-gray-300 text-gray-900" // 浅灰色
       case UnderstandingLevel.Basic:
-        return "bg-blue-50 border-blue-200 text-blue-800" // 浅蓝色
+        return "bg-blue-50 border-blue-200 text-blue-900" // 浅蓝色
       case UnderstandingLevel.Intermediate:
-        return "bg-amber-50 border-amber-200 text-amber-800" // 浅琥珀色
+        return "bg-amber-50 border-amber-200 text-amber-900" // 浅琥珀色
       case UnderstandingLevel.Advanced:
-        return "bg-orange-50 border-orange-200 text-orange-800" // 浅橙色
+        return "bg-orange-50 border-orange-200 text-orange-900" // 浅橙色
       case UnderstandingLevel.Mastered:
-        return "bg-emerald-50 border-emerald-200 text-emerald-800" // 浅绿色
+        return "bg-emerald-50 border-emerald-200 text-emerald-900" // 浅绿色
       default:
-        return "bg-gray-100 border-gray-300 text-gray-800"
+        return "bg-gray-100 border-gray-300 text-gray-900"
     }
   }
 
@@ -112,10 +112,10 @@ function CustomNode({ data, isConnectable }: NodeProps) {
     >
       <div className="flex flex-col">
         <div className="font-bold text-lg mb-1 truncate">{data.label || "无标题"}</div>
-        <div className="text-sm opacity-80 line-clamp-2">
+        <div className="text-sm line-clamp-2">
           {data.content ? getTextPreview(data.content) : "空白内容..."}
         </div>
-        <div className="text-xs mt-2 opacity-70 flex items-center">
+        <div className="text-xs mt-2 flex items-center">
           <div className={`w-2 h-2 rounded-full mr-1 ${getIndicatorStyle()}`}></div>
           {getUnderstandingLabel()}
         </div>

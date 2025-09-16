@@ -7,7 +7,7 @@
 // 配置信息
 const API_URL = process.env.NEXT_PUBLIC_OPENROUTER_API_BASE || "https://openrouter.ai/api/v1/chat/completions"
 // API 密钥从环境变量中获取
-const API_KEY = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY || "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"
+const API_KEY = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY || ""
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://conceptmap.app"
 const SITE_NAME = "knowledge-map"
 

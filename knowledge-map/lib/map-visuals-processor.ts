@@ -4,7 +4,7 @@ import { UnderstandingLevel } from "@/types/knowledge-map";
 // Opacity constants
 const FULLY_OPAQUE = 1.0;
 const CONNECTED_NOT_STARTED_OPACITY = 0.7;
-const ISOLATED_NOT_STARTED_OPACITY = 0.3;
+const ISOLATED_NOT_STARTED_OPACITY = 0.7;
 
 const EDGE_FULLY_OPAQUE = 1.0;
 const EDGE_CONNECTED_NOT_STARTED_OPACITY = 0.7;
